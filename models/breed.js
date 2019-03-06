@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     collectionComment: DataTypes.STRING
   }, {});
   breed.associate = function(models) {
+    breed.hasMany(models.breed,{
+      foreignKey: 'userId',
+      as: 'breed',
+    });
     // associations can be defined here
   };
   return breed;

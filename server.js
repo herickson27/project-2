@@ -10,6 +10,7 @@ require('dotenv').config();
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const app = express();
+const request = require('request');
 
 app.set('view engine', 'ejs');
 
@@ -51,9 +52,27 @@ app.get('/', function(req, res) {
 //to use middleware, simply call in the params of the page you want it to. 
 app.get('/profile', isLoggedIn, function(req, res) {
   console.log('')
-  res.render('profile');
+  res.render('main/profile');
 });
 
+//search get/
+app.get('/search', function(req, res){
+  let apiUrl = `http://api.petfinder.com/breed.list?key=${process.env.API_KEY}&animal=dog&format=json`
+  request(apiUrl, function(error, response, body){
+    console.log("EERRRRRRRRRRRORRRRRRRRR", error);
+    let breeds = JSON.parse(body).petfinder.breeds.breed; 
+    let states = [ "AK","AL","AR","AS","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
+    res.render('main/search', {breeds, states});
+  });
+});
+
+app.get('/results', function(req, res){
+  let apiUrl = `http://api.petfinder.com/pet.find?key=${process.env.API_KEY}&animal=dog&format=json&location=${req.query.state}&breed=${req.query.breed}`
+  request(apiUrl, function(error, response, body){
+    let dogs = JSON.parse(body).petfinder.pets.pet.contact
+    res.render('main/results', {dogs});
+  });
+});
 
 app.use('/auth', require('./controllers/auth'));
 // app.use('/breed', require('/.routes/breed'));

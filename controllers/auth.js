@@ -40,7 +40,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/', 
+  successRedirect: '/main/profile', 
   successFlash: 'You have successfully logged in',
   failureRedirect: '/auth/login', 
   failureMessage: 'Invalid username and/or password'

@@ -4,7 +4,11 @@ const db = require('../models');
 const router = express.Router()
 const request = require('request');
 //create new breed list 
-router.post()
+router.post('/', function(req, res){
+    db.breed.create({
+            //create collection 
+    })
+})
 
 //read/view Breed page 
 router.get('/:id', function(req, res){
@@ -24,5 +28,7 @@ router.delete('/:id', function(req, res){
         res.redirect('breed/show')
     });
 });
+
+
 
 modedule.exports = router;

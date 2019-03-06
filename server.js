@@ -52,12 +52,12 @@ app.get('/', function(req, res) {
 app.get('/profile', isLoggedIn, function(req, res) {
   console.log('')
   res.render('profile');
-
 });
 
 
 app.use('/auth', require('./controllers/auth'));
-app.use('/', require('/.controlers/auth'));
+app.use('/breed', require('/.routes/breed'));
+app.use('/dogs', require('.routes/dogs'));
 
 var server = app.listen(process.env.PORT || 3000);
 

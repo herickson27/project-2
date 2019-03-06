@@ -7,7 +7,7 @@ const request = require('request');
 router.post()
 
 //read/view Breed page 
-router.get('breed/:id', function(req, res){
+router.get('/:id', function(req, res){
     db.breed.findOne({
         where: {id: parseInt(req.params.id)},
     }).then(function(author){
@@ -17,7 +17,7 @@ router.get('breed/:id', function(req, res){
 //read/view breedComments
 
 //delete breed list
-router.delete('breed/:id', function(req, res){
+router.delete('/:id', function(req, res){
     db.breed.destroy({
         where: {id: req.params.id}
     }).then(function(){

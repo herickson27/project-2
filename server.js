@@ -56,8 +56,8 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 
 app.use('/auth', require('./controllers/auth'));
-app.use('/breed', require('/.routes/breed'));
-app.use('/dogs', require('.routes/dogs'));
+// app.use('/breed', require('/.routes/breed'));
+// app.use('/dogs', require('.routes/dogs'));
 
 var server = app.listen(process.env.PORT || 3000);
 

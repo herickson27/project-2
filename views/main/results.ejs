@@ -1,15 +1,18 @@
 
 
-   
 <h2>Dogs</h2>
 <section class='dog'>
     <% dogs.forEach(function(dog) { %>
+        <form method="POST" action="breed/show">
+            <input hidden type="text" name="name" value="<%= dogs.breed %>">
+            <button class="btn btn-primary" type="submit">Add to My Favorites</button>
+        </form>
         <%= dog.name.$t %> <br>
         <%= dog.description.$t %> <br>
         <%= dog.sex.$t %> <br>
         <%= dog.age.$t %> <br>
         <% }); %>
     </section>
-    
+ 
 <a href='/search'>Back to Search</a>
 

@@ -55,6 +55,16 @@ app.get('/profile', isLoggedIn, function(req, res) {
   res.render('main/profile');
 });
 
+//get dogs of that breed
+app.get('/results', function(req, res){
+  let apiUrl = `http://api.petfinder.com/pet.find?key=${process.env.API_KEY}&animal=dog&format=json&location=${req.query.state}&breed=${req.query.breed}`
+  request(apiUrl, function(error, response, body){
+    let dogs = JSON.parse(body).petfinder.pets.pet;
+    // res.json(JSON.parse(body))
+    res.render('main/results', {dogs});
+    //render resulted dogs to results page
+  });
+});
 //search get/
 app.get('/search', function(req, res){
   let apiUrl = `http://api.petfinder.com/breed.list?key=${process.env.API_KEY}&animal=dog&format=json`
@@ -63,16 +73,11 @@ app.get('/search', function(req, res){
     let breeds = JSON.parse(body).petfinder.breeds.breed; 
     let states = [ "AK","AL","AR","AS","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
     res.render('main/search', {breeds, states});
+    //search page
   });
 });
 
-app.get('/results', function(req, res){
-  let apiUrl = `http://api.petfinder.com/pet.find?key=${process.env.API_KEY}&animal=dog&format=json&location=${req.query.state}&breed=${req.query.breed}`
-  request(apiUrl, function(error, response, body){
-    let dogs = JSON.parse(body).petfinder.pets.pet.contact
-    res.render('main/results', {dogs});
-  });
-});
+
 
 app.use('/auth', require('./controllers/auth'));
 // app.use('/breed', require('/.routes/breed'));

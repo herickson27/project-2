@@ -1,2 +1,15 @@
-<h1>Dogs</h1>
+
+
+   
+<h2>Dogs</h2>
+<section class='dog'>
+    <% dogs.forEach(function(dog) { %>
+        <%= dog.name.$t %> <br>
+        <%= dog.description.$t %> <br>
+        <%= dog.sex.$t %> <br>
+        <%= dog.age.$t %> <br>
+        <% }); %>
+    </section>
+    
+<a href='/search'>Back to Search</a>
 

@@ -57,17 +57,15 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 //get dogs of that breed
 app.get('/results', function(req, res){
-  let apiUrl = `http://api.petfinder.com/pet.find?key=${process.env.API_KEY}&animal=dog&format=json&location=${encodeURI(req.query.state)}&breed=${encodeURI(req.query.breedName)}`
-  // let apiUrl = `http://api.petfinder.com/pet.find?key=${process.env.API_KEY}&animal=dog&format=json&location=$&breed=${encodeURI(req.query.breed)}`
-  console.log('API URL', apiUrl)
+  let apiUrl = `http://api.petfinder.com/pet.find?key=${process.env.API_KEY}&animal=dog&format=json&location=${req.query.state}&breed=${req.query.breedName}`
   request(apiUrl, function(error, response, body){
     console.log("ERRRRRRRRRRORRRRRR",error)
     let data = JSON.parse(body)
     if (data.petfinder.pets.pet) {
       let dogs = data.petfinder.pets.pet;
-      res.render('main/results', {dogs});
+      res.render('main/results', {dogs, breed: req.query.breedName});
     } else {
-      res.render('main/results', {dogs: []})
+      res.render('main/results', {dogs: [],breed: req.query.breedName})
     }
 
 

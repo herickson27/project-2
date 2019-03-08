@@ -4,7 +4,7 @@
 <section class='dog'>
     <% dogs.forEach(function(dog) { %>
         <form method="POST" action="/breeds">
-            <input hidden type="text" name="breed" value="<%= dogs.breed %>">
+            <input hidden type="text" name="breedName" value="<%= breed %>">
             <input hidden type="text" name="apiId" value="<%= dog.id.$t %>">
             <button class="btn btn-primary" type="submit">Add to My Favorites</button>
         </form>
@@ -12,7 +12,6 @@
         <%= dog.description.$t %> <br>
         <%= dog.sex.$t %> <br>
         <%= dog.age.$t %> <br>
-        <%= dog.media.photos.photo.$t %>
         <% }) %>
     </section>
 <a href='/search'>Back to Search</a>

@@ -3,6 +3,7 @@ const express = require('express');
 const db = require('..models');
 const router = express.Router()
 
+
 app.get('dogs/show', function(req, res){
     db.dogs.findbyId(req.params.id).then(function(doggo){
         let apiId = dog.id;

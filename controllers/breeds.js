@@ -3,16 +3,16 @@ const express = require('express');
 const db = require('../models');
 const router = express.Router()
 const request = require('request');
-//create new breed list 
+
+
+//POST
 router.post('/', function(req, res){
-    console.log(req.body)
+    console.log("REQQQQQQQQQQQQQQQQQQQQ🐶", req.body)
     db.user.findById(req.user.id).then(function(user){
     db.breed.findOrCreate({
         where: {
             breedName: req.body.breedName, 
             userId: req.user.id
-        }, defaults :{
-            breedName: 'Human Society Special'
         }
     }).spread(function(breed, created){
         breed.createDog({
@@ -24,6 +24,6 @@ router.post('/', function(req, res){
     });
 });
 
-
+//
 
 module.exports = router;

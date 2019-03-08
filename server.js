@@ -59,9 +59,18 @@ app.get('/profile', isLoggedIn, function(req, res) {
 app.get('/results', function(req, res){
   let apiUrl = `http://api.petfinder.com/pet.find?key=${process.env.API_KEY}&animal=dog&format=json&location=${req.query.state}&breed=${req.query.breed}`
   request(apiUrl, function(error, response, body){
-    let dogs = JSON.parse(body).petfinder.pets.pet;
+    console.log("ERRRRRRRRRRORRRRRR",error)
+    console.log("response",response)
+    let data = JSON.parse(body)
+    if (data.petfinder.pets.pet) {
+      let dogs = data.petfinder.pets.pet;
+      res.render('main/results', {dogs});
+    } else {
+      res.render('main/results', {dogs: []})
+    }
+
+
     // res.json(JSON.parse(body))
-    res.render('main/results', {dogs});
     //render resulted dogs to results page
   });
 });
@@ -80,7 +89,7 @@ app.get('/search', function(req, res){
 
 
 app.use('/auth', require('./controllers/auth'));
-// app.use('/breed', require('/.routes/breed'));
+app.use('/breeds', require('./controllers/breeds'));
 // app.use('/dogs', require('.routes/dogs'));
 
 var server = app.listen(process.env.PORT || 3000);

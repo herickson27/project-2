@@ -5,30 +5,25 @@ const router = express.Router()
 const request = require('request');
 //create new breed list 
 router.post('/', function(req, res){
-    db.breed.create({
-            //create collection 
-    })
-})
-
-//read/view Breed page 
-router.get('/:id', function(req, res){
-    db.breed.findOne({
-        where: {id: parseInt(req.params.id)},
-    }).then(function(author){
-        res.render('breed/show', {breed});
+    console.log(req.body)
+    db.user.findById(req.user.id).then(function(user){
+    db.breed.findOrCreate({
+        where: {
+            breedName: req.body.breedName, 
+            userId: req.user.id
+        }, defaults :{
+            breedName: 'Human Society Special'
+        }
+    }).spread(function(breed, created){
+        breed.createDog({
+            apiId: parseInt(req.body.apiId),
+        }).then(function(){
+            res.redirect('/profile')
+        });
     });
-});
-//read/view breedComments
-
-//delete breed list
-router.delete('/:id', function(req, res){
-    db.breed.destroy({
-        where: {id: req.params.id}
-    }).then(function(){
-        res.redirect('breed/show')
     });
 });
 
 
 
-modedule.exports = router;
+module.exports = router;

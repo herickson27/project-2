@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     breedId: DataTypes.INTEGER
   }, {});
   dog.associate = function(models) {
+    models.dog.belongsTo(models.breed)
     // associations can be defined here
   };
   return dog;

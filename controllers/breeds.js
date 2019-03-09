@@ -5,7 +5,7 @@ const router = express.Router()
 const request = require('request');
 
 
-//POST
+//POST dog of breed to database
 router.post('/', function(req, res){
     console.log("REQQQQQQQQQQQQQQQQQQQQ🐶", req.body)
     db.user.findById(req.user.id).then(function(user){
@@ -24,6 +24,11 @@ router.post('/', function(req, res){
     });
 });
 
-//
+//GET all dogs of breed from database and 
+router.get('/', function((req, res){
+    db.doggo.findAll({
+        where: {userId : req.user.id}
+    })
+}).then(function)
 
 module.exports = router;

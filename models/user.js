@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   user.associate = function(models) {
-    // associations can be defined here
+    models.user.hasMany(models.breed)
     //images, location
   }; 
   //validate function to compare entered password to hash password. There is a bcrypt function that is used here

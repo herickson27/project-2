@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   breed.associate = function(models) {
     models.breed.hasMany(models.dog)
+    models.breed.belongsTo(models.user)
     // associations can be defined here
   };
   return breed;

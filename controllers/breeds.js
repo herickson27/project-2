@@ -25,10 +25,12 @@ router.post('/', function(req, res){
 });
 
 //GET all dogs of breed from database and 
-router.get('/', function((req, res){
+router.get('/', (function(req, res){
     db.doggo.findAll({
         where: {userId : req.user.id}
-    })
-}).then(function)
+    }).then(function(user){
+        get
+    }
+})
 
 module.exports = router;

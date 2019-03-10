@@ -73,7 +73,7 @@ app.get('/results', function(req, res){
     //render resulted dogs to results page
   });
 });
-//search get/
+//search is the url pattern. when a page that the user is typing in. the message title
 app.get('/search', function(req, res){
   let apiUrl = `http://api.petfinder.com/breed.list?key=${process.env.API_KEY}&animal=dog&format=json`
   request(apiUrl, function(error, response, body){

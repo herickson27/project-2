@@ -62,18 +62,18 @@ app.get('/results', function(req, res){
   request(apiUrl, function(error, response, body){
     console.log("ERRRRRRRRRRORRRRRR",error)
     let data = JSON.parse(body)
-    if (data.petfinder.pets.pet) {
+    if (data.petfinder.pets) {
       let pups = data.petfinder.pets.pet;
-      console.log("FIRST PUP", pups[0])
-      console.log("WTF", pups[0].media.photos.photo[2].$t)
-      let imgs = pups.map(p => {
-        if(p.media.photos){
-          p.media.photos
-        } else {
-          "i don't understand"
-        }
-      })
-      console.log("IMGS", imgs)
+      // console.log("FIRST PUP", pups[0])
+      // console.log("WTF", pups[0].media.photos.photo[2].$t)
+      // let imgs = pups.map(p => {
+      //   if(p.media.photos){
+      //     p.media.photos
+      //   } else {
+      //     "i don't understand"
+      //   }
+      // })
+      // console.log("IMGS", imgs)
       res.render('main/results', {pups, breed: req.query.breedName});
     } else {
       res.render('main/results', {pups: [],breed: req.query.breedName})

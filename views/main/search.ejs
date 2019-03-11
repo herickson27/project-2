@@ -1,17 +1,28 @@
 <h2>Search Page</h2>
 <h1><%= currentUser.name %></h1>
+
 <form method='GET' action='/results'>
-<select name='breedName'>
-    <% breeds.forEach( function(breed){ %>
-    <option value='<%=breed.$t %>'><%= breed.$t %></option>
-    <% }) %> 
-</select>
-<select name="state">
-    <% states.forEach(function(state){ %>
-        <option value='<%= state %>'><%= state %></option>
-    <% }) %>
-</select>
-<input class='btn' type='submit' value='Find doggos!'>
+    <div class="input-field col s12">
+        <select name="breedName">
+            <option value="" disabled selected>Choose your option</option>
+            <% breeds.forEach( function(breed){ %>
+            <option value='<%=breed.$t %>'><%= breed.$t %></option>
+            <% }) %> 
+        </select>
+        <label>Breed</label>
+    </div>
+
+    <div class="input-field col s12">
+        <select name="state">
+            <option value="" disabled selected>Choose your option</option>
+            <% states.forEach(function(state){ %>
+                <option value='<%= state %>'><%= state %></option>
+            <% }) %>
+        </select>
+        <label>State</label>
+    </div>
+    <input type='submit' value='Find doggos!'>
 </form>
 
 <a href='/profile'>Back to Profile</a>
+

@@ -4,29 +4,6 @@ const db = require('../models');
 const router = express.Router()
 const request = require('request');
 
-//POST dog to database when you click "Add to Favorites" on the results page
-// router.post('/', function(req, res) {
-//     console.log("jjjjj🐶", req.body)
-//     db.pup.findOrCreate({
-//         where: {
-//             apiId: req.body.apiId,
-//             name: req.body.name,
-//             breedName: req.body.breedName,
-//             sex: req.body.sex,
-//             age: req.body.age
-//         }
-//     }).spread(function(pup, created){
-//         //new db query for user
-//         db.user.findById(req.body.currentUser.id)
-//         .then(function(user){
-//             //grabbing the pup that the logged in user added
-//             pup.addUser(user).then(function(user){
-//                 console.log('added favies succesfully!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-//                 res.status(200).redirect('profile', 200, pup)
-//             });
-//         });
-//     });
-// });
 router.post('/', function(req, res) {
 	console.log(req.body)
 	db.pup.findOrCreate({

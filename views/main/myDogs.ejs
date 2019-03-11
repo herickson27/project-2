@@ -1,0 +1,13 @@
+<h1><%= currentUser.name %>'s Favorite <%= breed %>s</h1>
+
+<ul>
+    <% dogs.map(d => { %>
+        <li>
+            <div>
+                <h3><%= d.name %></h3>
+                <p>Sex: <%= d.sex %></p>
+                <p>Age: <%= d.age %></p>
+            </div>
+        </li>
+    <% }) %>
+</ul>

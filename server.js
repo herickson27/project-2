@@ -14,6 +14,7 @@ const request = require('request');
 
 app.set('view engine', 'ejs');
 
+app.use('/', express.static('public'));
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
@@ -62,10 +63,20 @@ app.get('/results', function(req, res){
     console.log("ERRRRRRRRRRORRRRRR",error)
     let data = JSON.parse(body)
     if (data.petfinder.pets.pet) {
-      let dogs = data.petfinder.pets.pet;
-      res.render('main/results', {dogs, breed: req.query.breedName});
+      let pups = data.petfinder.pets.pet;
+      console.log("FIRST PUP", pups[0])
+      console.log("WTF", pups[0].media.photos.photo[2].$t)
+      let imgs = pups.map(p => {
+        if(p.media.photos){
+          p.media.photos
+        } else {
+          "i don't understand"
+        }
+      })
+      console.log("IMGS", imgs)
+      res.render('main/results', {pups, breed: req.query.breedName});
     } else {
-      res.render('main/results', {dogs: [],breed: req.query.breedName})
+      res.render('main/results', {pups: [],breed: req.query.breedName})
     }
 
 

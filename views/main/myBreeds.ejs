@@ -1,0 +1,7 @@
+<h1><%= currentUser.name %>'s Breeds</h1>
+
+<ul>
+    <% breedList.map(breedName => { %>
+        <li><a href="/breeds/mydogs/<%= breedName %>/<%= currentUser.id %>"><%= breedName %></a></li>
+    <% }) %>
+</ul>

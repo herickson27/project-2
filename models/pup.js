@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const dog = sequelize.define('dog', {
+  const pup = sequelize.define('pup', {
     apiId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     breedName: DataTypes.STRING,
@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     age: DataTypes.STRING,
     img: DataTypes.STRING
   }, {});
-  dog.associate = function(models) {
-    models.dog.belongsToMany(models.user, {through: 'dogUser'})
+  pup.associate = function(models) {
     // associations can be defined here
+    models.pup.belongsToMany(models.user, {through: "pupUser"})
   };
-  return dog;
+  return pup;
 };
